@@ -2,6 +2,21 @@ import streamlit as st
 import bcrypt
 import database
 
+def main():
+    st.markdown("<h1 style='text-align: center; color: yellow;'>System</h1>", unsafe_allow_html=True)
+
+    st.write("")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        if st.button("Fazer Login", key="login_btn", help="Clique para fazer login"):
+            login()
+
+    with col2:
+        if st.button("Registrar", key="register_btn", help="Clique para se registrar"):
+            register()
+
 def login():
     st.title("System - Access Panel")
     st.sidebar.image("icons/icon.png")
@@ -43,14 +58,6 @@ def register():
                 """, (name, email, username, hashed_password))  
             database.conn.commit()
             st.success("Conta criada com sucesso")
-
-def main():
-    page = st.sidebar.radio("Navigation", ["Login", "Register"])
-    
-    if page == "Login":
-        login()
-    elif page == "Register":
-        register()
 
 if __name__ == "__main__":
     main()
